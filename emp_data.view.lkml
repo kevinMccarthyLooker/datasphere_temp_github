@@ -2,9 +2,36 @@ view: emp_data {
   sql_table_name: "gludb-euw1-stg-app-dataspheretransformeddatadb".emp_data ;;
 
   measure: count {
+    description: "this excludes test data"
+    label: "Employee Count"
+
     type: count
     drill_fields: [detail*]
   }
+
+  measure: first_hire_date  {
+    group_label: "date stuff"
+    type: date
+    sql: min(${hire_date_formatted}) ;;
+  }
+
+  measure: last_hire_date  {
+    group_label: "date stuff"
+    type: date
+    sql: max(${hire_date_formatted}) ;;
+  }
+
+  measure:  first_to_last_hire_date_time{
+    type: number
+    sql: ${first_hire_date};;#-${last_hire_date} ;;
+  }
+
+  measure: min_id {
+    type: min
+    sql: ${employee_id} ;;
+  }
+
+
 
   dimension: status {
     type: string
@@ -12,6 +39,7 @@ view: emp_data {
   }
 
   dimension: employee_id {
+    primary_key: yes
     type: string
     sql: ${TABLE}.employee_id ;;
   }
@@ -82,6 +110,25 @@ view: emp_data {
   dimension: country {
     type: string
     sql: ${TABLE}.country ;;
+  }
+
+  dimension: case_based_geo {
+    case: {
+      when: {
+        sql: ${country}='United States' ;;
+        label: "North America"
+      }
+      when: {
+        sql: ${country}='México' ;;
+        label: "North America"
+      }
+      else: "ROW"
+    }
+  }
+
+  dimension: is_north_america {
+    type: yesno
+    sql: ${case_based_geo}='North America' ;;
   }
 
   dimension: region {

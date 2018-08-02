@@ -1,9 +1,8 @@
 view: route {
-  sql_table_name: "gludb-euw1-stg-app-dataspheretransformeddatadb".route ;;
-#   derived_table: {
-#     sql: select * from "gludb-euw1-stg-app-dataspheretransformeddatadb".route limit 10
-#       ;;
-#   }
+#   sql_table_name: "gludb-euw1-stg-app-dataspheretransformeddatadb".route ;;
+  derived_table: {
+    sql: select * from "gludb-euw1-stg-app-dataspheretransformeddatadb".route where not aid ='\N';;
+  }
 
   measure: count {
     type: count

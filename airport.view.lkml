@@ -18,12 +18,14 @@ view: airport {
   }
 
   dimension: id {
+    primary_key: yes
     hidden: yes
     type: string
     sql: ${TABLE}.id ;;
   }
 
   dimension: name {
+#     primary_key: yes
     type: string
     sql: ${TABLE}.name ;;
   }
@@ -97,11 +99,11 @@ view: airport {
     sql_longitude: ${TABLE}.longitude ;;
   }
 
-  dimension: distance_between_airports {
-    type: distance
-    start_location_field: location
-    end_location_field: other_airport.location
-  }
+#   dimension: distance_between_airports {
+#     type: distance
+#     start_location_field: location
+#     end_location_field: other_airport.location
+#   }
 
 
   set: detail {
