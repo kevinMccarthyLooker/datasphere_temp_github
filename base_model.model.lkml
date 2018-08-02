@@ -26,6 +26,11 @@ explore: route {
     type: left_outer
     relationship: many_to_one
   }
+  join: airline {
+    sql_on: ${route.aid}=cast(${airline.aid} as varchar) ;;
+    type:  left_outer
+    relationship: many_to_one
+  }
 }
 
 
