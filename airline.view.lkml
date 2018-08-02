@@ -12,8 +12,8 @@ view: airline {
   }
 
   dimension: aid {
-    type: number
-    sql: ${TABLE}."﻿aid" ;;
+    type: string
+    sql: ${TABLE}.".aid" ;;
   }
 
   dimension: name {
