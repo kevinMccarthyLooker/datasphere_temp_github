@@ -13,8 +13,14 @@ view: airport {
   }
 
   dimension: id {
+    hidden: yes
     type: string
     sql: ${TABLE}.id ;;
+  }
+
+  dimension: id2 {
+    sql: ${id} ;;
+
   }
 
   dimension: name {
@@ -64,13 +70,15 @@ view: airport {
 
   dimension: dst {
     type: string
-    sql: ${TABLE}.dst ;;
+    sql: ${TABLE}.dst;;
   }
 
   dimension: timezone {
     type: string
     sql: ${TABLE}.timezone ;;
   }
+
+
 
   dimension: location {
     type: location
