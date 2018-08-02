@@ -8,3 +8,5 @@ explore: fusion {}
 explore: emp_data {}
 
 explore: airport {}
+explore: airline {}
+explore: route {}
