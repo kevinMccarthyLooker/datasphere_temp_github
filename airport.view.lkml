@@ -10,6 +10,7 @@ view: airport {
     type: count
     drill_fields: [detail*]
   }
+  #
 
   measure: average_altitude {
     type: average
@@ -31,7 +32,8 @@ view: airport {
   }
 
   dimension: city {
-    hidden: yes
+
+    hidden: no
     type: string
     sql: ${TABLE}.city ;;
   }
@@ -48,6 +50,13 @@ view: airport {
     sql:  concat(${city},${country}) ;;
   }
 
+
+  dimension: city_country {
+    label: "city, country"
+    type: string
+    sql: concat(${city},', ',${country}) ;;
+    order_by_field: country
+  }
 
   dimension: iata {
     type: string

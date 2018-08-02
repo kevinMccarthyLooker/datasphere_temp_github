@@ -7,12 +7,18 @@ explore: fusion {}
 
 explore: emp_data {
   view_label:"employee"
-
   }
 
 explore: airport {
-#   fields:[ALL_FIELDS*,-airport.distance_between_airports]
+  always_filter: {
+    filters: {
+      field: country
+      value: "-United States"
+    }
+  }
 }
+
+
 explore: airline {}
 
 
