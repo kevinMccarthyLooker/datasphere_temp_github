@@ -5,7 +5,6 @@ view: airline {
 #       ;;
 #   }
 
-  suggestions: no
 
   measure: count {
     type: count

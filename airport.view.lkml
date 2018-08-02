@@ -5,7 +5,6 @@ view: airport {
 #     sql: select * from "gludb-euw1-stg-app-dataspheretransformeddatadb".airport;;
 #   }
 
-  suggestions: no
 
   measure: count {
     type: count
@@ -18,25 +17,28 @@ view: airport {
     sql: ${TABLE}.id ;;
   }
 
-  dimension: id2 {
-    sql: ${id} ;;
-
-  }
-
   dimension: name {
     type: string
     sql: ${TABLE}.name ;;
   }
 
   dimension: city {
+    hidden: yes
     type: string
     sql: ${TABLE}.city ;;
   }
 
   dimension: country {
     type: string
-    sql: ${TABLE}.country ;;
+    sql: substr(${TABLE}.country,1,2) ;;
   }
+
+  dimension: city_with_country {
+    label: "City"
+    type: string
+    sql:  concat(${city},${country}) ;;
+  }
+
 
   dimension: iata {
     type: string
@@ -61,6 +63,7 @@ view: airport {
   dimension: altitude {
     type: number
     sql: ${TABLE}.altitude ;;
+
   }
 
   dimension: tz {

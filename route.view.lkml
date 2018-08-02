@@ -5,8 +5,6 @@ view: route {
 #       ;;
 #   }
 
-  suggestions: no
-
   measure: count {
     type: count
     drill_fields: [detail*]
