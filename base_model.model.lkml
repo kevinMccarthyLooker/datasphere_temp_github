@@ -34,9 +34,9 @@ explore: route {
   }
 
   join: airline {
-    sql_on: ${route.aid}=CAST(${airline.aid} as varchar) ;;
-    type: left_outer
-    relationship: many_to_many
+    sql_on: ${route.aid}=cast(${airline.aid} as varchar) ;;
+    type:  left_outer
+    relationship: many_to_one
   }
 }
 
