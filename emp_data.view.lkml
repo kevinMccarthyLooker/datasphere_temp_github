@@ -41,6 +41,19 @@ view: emp_data {
     sql: ${TABLE}.hire_date ;;
   }
 
+  dimension: hire_date_formatted {
+    type: date_raw
+    sql: date_add('day',cast(floor(cast(${hire_date} as double)) as integer),cast('1900-01-01' as timestamp)) ;;
+  }
+
+  dimension_group: hire_date_final {
+#     convert_tz: no
+    type: time
+    timeframes: [raw,date,month,year,day_of_month, month_name]
+    sql: ${hire_date_formatted} ;;
+  }
+
+
   dimension: termination_date {
     type: string
     sql: ${TABLE}.termination_date ;;

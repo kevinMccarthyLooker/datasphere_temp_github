@@ -11,6 +11,12 @@ view: airport {
     drill_fields: [detail*]
   }
 
+  measure: average_altitude {
+    type: average
+    sql: ${altitude} ;;
+    value_format_name: decimal_0
+  }
+
   dimension: id {
     hidden: yes
     type: string
@@ -30,7 +36,8 @@ view: airport {
 
   dimension: country {
     type: string
-    sql: substr(${TABLE}.country,1,2) ;;
+    sql: ${TABLE}.country ;;
+    map_layer_name: countries
   }
 
   dimension: city_with_country {
@@ -60,6 +67,7 @@ view: airport {
     sql: ${TABLE}.longitude ;;
   }
 
+
   dimension: altitude {
     type: number
     sql: ${TABLE}.altitude ;;
@@ -88,6 +96,13 @@ view: airport {
     sql_latitude: ${TABLE}.latitude ;;
     sql_longitude: ${TABLE}.longitude ;;
   }
+
+  dimension: distance_between_airports {
+    type: distance
+    start_location_field: location
+    end_location_field: other_airport.location
+  }
+
 
   set: detail {
     fields: [
