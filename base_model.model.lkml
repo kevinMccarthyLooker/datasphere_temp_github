@@ -7,4 +7,11 @@ explore: fusion {}
 
 explore: emp_data {}
 
-explore: airport {}
+explore: airport {
+  always_filter: {
+    filters: {
+      field: country
+      value: "-United States"
+    }
+  }
+}

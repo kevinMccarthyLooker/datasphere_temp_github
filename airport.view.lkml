@@ -29,6 +29,7 @@ view: airport {
   }
 
   dimension: city {
+    hidden: no
     type: string
     sql: ${TABLE}.city ;;
   }
@@ -36,6 +37,13 @@ view: airport {
   dimension: country {
     type: string
     sql: ${TABLE}.country ;;
+  }
+
+  dimension: city_country {
+    label: "city, country"
+    type: string
+    sql: concat(${city},', ',${country}) ;;
+    order_by_field: country
   }
 
   dimension: iata {
