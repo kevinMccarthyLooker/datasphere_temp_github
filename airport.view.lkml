@@ -5,30 +5,34 @@ view: airport {
 #     sql: select * from "gludb-euw1-stg-app-dataspheretransformeddatadb".airport;;
 #   }
 
-  suggestions: no
 
   measure: count {
     type: count
     drill_fields: [detail*]
   }
+  #
+
+  measure: average_altitude {
+    type: average
+    sql: ${altitude} ;;
+    value_format_name: decimal_0
+  }
 
   dimension: id {
+    primary_key: yes
     hidden: yes
     type: string
     sql: ${TABLE}.id ;;
   }
 
-  dimension: id2 {
-    sql: ${id} ;;
-
-  }
-
   dimension: name {
+#     primary_key: yes
     type: string
     sql: ${TABLE}.name ;;
   }
 
   dimension: city {
+
     hidden: no
     type: string
     sql: ${TABLE}.city ;;
@@ -37,7 +41,15 @@ view: airport {
   dimension: country {
     type: string
     sql: ${TABLE}.country ;;
+    map_layer_name: countries
   }
+
+  dimension: city_with_country {
+    label: "City"
+    type: string
+    sql:  concat(${city},${country}) ;;
+  }
+
 
   dimension: city_country {
     label: "city, country"
@@ -66,9 +78,11 @@ view: airport {
     sql: ${TABLE}.longitude ;;
   }
 
+
   dimension: altitude {
     type: number
     sql: ${TABLE}.altitude ;;
+
   }
 
   dimension: tz {
@@ -93,6 +107,13 @@ view: airport {
     sql_latitude: ${TABLE}.latitude ;;
     sql_longitude: ${TABLE}.longitude ;;
   }
+
+#   dimension: distance_between_airports {
+#     type: distance
+#     start_location_field: location
+#     end_location_field: other_airport.location
+#   }
+
 
   set: detail {
     fields: [
